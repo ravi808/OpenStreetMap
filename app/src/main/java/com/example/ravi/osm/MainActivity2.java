@@ -1,6 +1,8 @@
 package com.example.ravi.osm;
 
 import android.Manifest;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -20,6 +22,7 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
     double lat, log;
     Button b5;
     Button btnLocateMe;
+    MapFragmentClass mfc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,13 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
         tv2 = findViewById(R.id.tv2);
         b5 = findViewById(R.id.b5);
         btnLocateMe = findViewById(R.id.b4);
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft =  fm.beginTransaction();
+        mfc = new MapFragmentClass();
+        ft.add(R.id.map,mfc,"Rvi");
+        ft.commit();
+
         btnLocateMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +68,7 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
         });
 
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -68,6 +79,7 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
     }
 
