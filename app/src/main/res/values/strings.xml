@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Welcome to the World of OpenStreetMap</string>
+
+    <string name="s1">Add Your Place to OSM</string>
+    <string name="s2">Know About Your Contribution</string>
+    <string name="s3">Resolve OSM errors</string>
+    <string name="s4">Locate me</string>
+    <string name="s5">latitude</string>
+    <string name="s6">longitude</string>
+    <string name="s7">Add location to OpenStreetMap</string>
+</resources>
