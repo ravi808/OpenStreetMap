@@ -16,12 +16,12 @@
         android:layout_height="200dp"
         android:id="@+id/map"
         android:layout_margin="5dp"
-        class="com.example.ravi.osm.MapFragmentClass"/>
+        class="com.google.android.gms.maps.SupportMapFragment"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/b4"
+        android:id="@+id/locateme"
         android:text="@string/s4"
         android:textAllCaps="false"
         android:textColor="@color/c2"

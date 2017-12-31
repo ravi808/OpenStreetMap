@@ -17,7 +17,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity2 extends AppCompatActivity implements LocationListener {
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class MainActivity2 extends AppCompatActivity implements LocationListener , OnMapReadyCallback {
     TextView tv1, tv2;
     double lat, log;
     Button b5;
@@ -31,13 +37,18 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
         tv1 = findViewById(R.id.tv1);
         tv2 = findViewById(R.id.tv2);
         b5 = findViewById(R.id.b5);
-        btnLocateMe = findViewById(R.id.b4);
+        btnLocateMe = findViewById(R.id.locateme);
 
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft =  fm.beginTransaction();
-        mfc = new MapFragmentClass();
-        ft.add(R.id.map,mfc,"Rvi");
-        ft.commit();
+           /* FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft =  fm.beginTransaction();
+            mfc = new MapFragmentClass();
+            ft.add(R.id.map,mfc);
+            ft.commit();
+    */
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(MainActivity2.this);
+
 
         btnLocateMe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +78,7 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
             }
         });
 
+
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -82,6 +94,14 @@ public class MainActivity2 extends AppCompatActivity implements LocationListener
 
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 0, this);
     }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(29.863592, 73.898529))
+                .title("Marker"));
+    }
+
 
     @Override
     public void onLocationChanged(Location location) {
