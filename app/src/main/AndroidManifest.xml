@@ -27,7 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ContributeToOSM"></activity>
+        <activity android:name=".ContributeToOSM" />
+        <activity android:name=".OSMcontribution" />
+        <activity android:name=".ErrorsCorrection"></activity>
     </application>
 
 </manifest>
